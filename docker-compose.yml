@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  rag-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sales-sequence-copilot-service
+    ports:
+      - "8000:8000"
+    environment:
+      - LOG_LEVEL=INFO
+      - EMBEDDINGS_PROVIDER=sentence-transformers
+      - EMBEDDINGS_DIMENSION=384
+      - VECTORSTORE_TYPE=local
+      - LLM_PROVIDER=mock
+      - RERANKER_ENABLED=true
+    volumes:
+      # Mount the data folder to persist local vector store changes on the host
+      - ./data:/app/data
+    restart: unless-stopped

@@ -1,0 +1,64 @@
+# Sales Sequence Intelligence Copilot Configuration
+
+system:
+  project_name: "sales-sequence-copilot"
+  log_level: "INFO"
+
+data:
+  raw_csv_path: "data/raw_sequences.csv"
+  processed_output_dir: "data/processed/"
+
+chunking:
+  strategy: "sentence"
+  chunk_size: 500
+  chunk_overlap: 50
+  semantic_threshold: 0.7
+
+embeddings:
+  provider: "sentence-transformers"            # 'gemini', 'cohere', 'mock', or 'sentence-transformers'
+  gemini:
+    model_name: "models/text-embedding-004"
+    api_key_env: "GEMINI_API_KEY"
+  cohere:
+    model_name: "embed-english-v3.0"
+    api_key_env: "COHERE_API_KEY"
+  sentence-transformers:
+    model_name: "all-MiniLM-L6-v2"
+  dimension: 384
+
+vectorstore:
+  type: "azure"                # 'azure', 'qdrant' or 'local'
+  qdrant:
+    url_env: "QDRANT_URL"       # Environment variable name for Qdrant Cloud URL
+    api_key_env: "QDRANT_API_KEY"
+    collection_name: "sales_sequences"
+  local:
+    persist_path: "data/local_store.json"
+    collection_name: "sales_sequences"
+  azure:
+    endpoint_env: "AZURE_AI_SEARCH_URL"
+    api_key_env: "AZURE_AI_SEARCH_KEY"
+    index_name: "sales_sequences"
+
+retrieval:
+  semantic_k: 20
+  bm25_k: 20
+  hybrid_k: 20
+  fusion_type: "rrf"
+  rrf_k: 60
+  semantic_weight: 0.7
+  bm25_weight: 0.3
+  score_threshold: 0.1
+
+reranker:
+  enabled: true
+  model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  top_n: 10
+  simulate_fallback: true
+
+llm:
+  provider: "gemini"
+  model_name: "gemini-2.5-flash"
+  temperature: 0.2
+  max_output_tokens: 1024
+  grounding_threshold: 0.6

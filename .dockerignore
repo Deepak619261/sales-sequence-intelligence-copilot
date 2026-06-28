@@ -1,0 +1,23 @@
+# Exclude local directories
+.git/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Exclude task logs and system data
+.system_generated/
+CVS
+.DS_Store
+
+# Exclude local testing databases
+data/local_store_test.json
+evaluation_report.md
+
+# Docker exclusions
+Dockerfile
+docker-compose.yml
+.dockerignore
+.env

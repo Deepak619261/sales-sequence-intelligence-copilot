@@ -1,0 +1,97 @@
+[
+  {
+    "query": "caching database scaling bottleneck",
+    "relevant_chunk_ids": [
+      "email_001_sent_0",
+      "email_002_sent_0",
+      "email_004_sent_0",
+      "email_005_sent_0"
+    ]
+  },
+  {
+    "query": "compliance audit preparation regulations",
+    "relevant_chunk_ids": [
+      "email_007_sent_0",
+      "email_007_sent_1",
+      "email_008_sent_0",
+      "email_009_sent_0",
+      "email_010_sent_0",
+      "email_011_sent_0",
+      "email_012_sent_0"
+    ]
+  },
+  {
+    "query": "how to reduce time to hire software developers",
+    "relevant_chunk_ids": [
+      "email_013_sent_0",
+      "email_013_sent_1",
+      "email_014_sent_0",
+      "email_015_sent_0",
+      "email_016_sent_0",
+      "email_017_sent_0"
+    ]
+  },
+  {
+    "query": "preventing clinician schedule conflicts and double bookings",
+    "relevant_chunk_ids": [
+      "email_019_sent_0",
+      "email_020_sent_0",
+      "email_021_sent_0",
+      "email_023_sent_0",
+      "email_024_sent_0"
+    ]
+  },
+  {
+    "query": "Acme brand customer case studies",
+    "relevant_chunk_ids": [
+      "email_002_sent_0",
+      "email_010_sent_0",
+      "email_014_sent_0",
+      "email_021_sent_0"
+    ]
+  },
+  {
+    "query": "sharing calendars and scheduling meetings",
+    "relevant_chunk_ids": [
+      "email_003_sent_0",
+      "email_011_sent_0",
+      "email_017_sent_0",
+      "email_023_sent_0",
+      "email_025_sent_0"
+    ]
+  },
+  {
+    "query": "checklists and reference PDFs for managers",
+    "relevant_chunk_ids": [
+      "email_009_sent_0",
+      "email_012_sent_0",
+      "email_020_sent_0",
+      "email_022_sent_0"
+    ]
+  },
+  {
+    "query": "improving latency during traffic surges",
+    "relevant_chunk_ids": [
+      "email_001_sent_0",
+      "email_002_sent_0",
+      "email_004_sent_0"
+    ]
+  },
+  {
+    "query": "integrating software tooling into ATS or workflow",
+    "relevant_chunk_ids": [
+      "email_007_sent_1",
+      "email_016_sent_0",
+      "email_017_sent_0",
+      "email_021_sent_0"
+    ]
+  },
+  {
+    "query": "clinician burnout and scheduling workloads",
+    "relevant_chunk_ids": [
+      "email_019_sent_0",
+      "email_020_sent_0",
+      "email_022_sent_0"
+    ]
+  }
+]
