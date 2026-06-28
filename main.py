@@ -9,9 +9,6 @@ import uvicorn
 
 from api.routes import router
 from config import get_config
-from core.ingestion.pipeline import IngestionPipeline
-from embeddings.factory import get_embedder
-from core.vectorstore.factory import get_vector_store
 from utils.logging import setup_json_logger
 
 # Initialize structured logger for service entrypoint
@@ -20,27 +17,28 @@ logger = setup_json_logger("main", level="INFO")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
-    Validates configuration and ensures the vector database is populated.
-    Seeds the database automatically from the configured CSV if empty.
+    Performs lightweight startup validation only.
+
+    Azure App Service marks the container unhealthy if the process does not bind
+    quickly. Heavy model/vector-store clients are initialized lazily by request
+    handlers instead of during ASGI lifespan startup.
     """
     logger.info("Initializing Sales Sequence Intelligence Copilot service...")
     
-    config = get_config()
-    config_dict = config.to_dict()
-    
     try:
-        # Check if database has elements
-        embedder = get_embedder(config_dict)
-        vector_store = get_vector_store(config_dict)
-        
-        chunks = vector_store.get_all_chunks()
-        if not chunks:
-            logger.info("Vector database is empty. Ready for document uploads via the UI.")
-        else:
-            logger.info(f"Vector database has {len(chunks)} pre-existing chunks. Ready to serve.")
-            
+        config = get_config()
+        logger.info(
+            "Configuration loaded",
+            extra={
+                "extra_data": {
+                    "embeddings_provider": config.embeddings.provider,
+                    "vectorstore_type": config.vectorstore.type,
+                }
+            },
+        )
     except Exception as e:
-        logger.error(f"Service initialization checks encountered an error: {e}")
+        logger.error(f"Service configuration failed during startup: {e}")
+        raise
         
     yield
 
@@ -96,4 +94,4 @@ def health_check():
     }
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", "8000")), reload=False)
